@@ -36,14 +36,6 @@
 
 #include <GCS_MAVLink.h>
 #include "HaraGndLink.h"
-// #include "FrSkySportSensor.h"
-// #include "FrSkySportSensorFcs.h"
-// #include "FrSkySportSensorFlvss.h"
-// #include "FrSkySportSensorGps.h"
-// #include "FrSkySportSensorRpm.h"
-// #include "FrSkySportSensorVario.h"
-// #include "FrSkySportSingleWireSerial.h"
-// #include "FrSkySportTelemetry.h"
 #include "Logger.h"
 #include "MavLink.h"
 #include "FrSkySPort.h"
