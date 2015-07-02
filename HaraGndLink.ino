@@ -36,23 +36,18 @@
 
 #include <GCS_MAVLink.h>
 #include "HaraGndLink.h"
-#include "FrSkySportSensor.h"
-#include "FrSkySportSensorFcs.h"
-#include "FrSkySportSensorFlvss.h"
-#include "FrSkySportSensorGps.h"
-#include "FrSkySportSensorRpm.h"
-#include "FrSkySportSensorVario.h"
-#include "FrSkySportSingleWireSerial.h"
-#include "FrSkySportTelemetry.h"
+// #include "FrSkySportSensor.h"
+// #include "FrSkySportSensorFcs.h"
+// #include "FrSkySportSensorFlvss.h"
+// #include "FrSkySportSensorGps.h"
+// #include "FrSkySportSensorRpm.h"
+// #include "FrSkySportSensorVario.h"
+// #include "FrSkySportSingleWireSerial.h"
+// #include "FrSkySportTelemetry.h"
 #include "Logger.h"
 #include "MavLink.h"
 #include "FrSkySPort.h"
-
-#define PRODUCT_STRING  "HaraGndLink v0.1"
-
-#define DEBUG_SERIAL    Serial
-#define MAVLINK_SERIAL  Serial2
-#define LEDPIN          13
+#include "TelemetryData.h"
 
 uint32_t next_1000_loop = 0L;
 uint32_t next_200_loop = 0L;

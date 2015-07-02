@@ -1,5 +1,11 @@
-#ifndef MAVSKY
-#define MAVSKY
+#ifndef HARAGNDLINK
+#define HARAGNDLINK
+
+#define PRODUCT_STRING  "HaraGndLink v0.1"
+
+#define DEBUG_SERIAL    Serial
+#define MAVLINK_SERIAL  Serial2
+#define LEDPIN          13
 
 #define FAULT_MAV_OFFLINE    1
 #define FAULT_SPORT_OFFLINE  2
