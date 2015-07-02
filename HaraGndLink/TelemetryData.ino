@@ -151,7 +151,7 @@ uint16_t telem_data_get_value(uint16_t telemetry_data_value_id) {
           break;
       }
       break;   
-  }  
+  } 
 }
 
 char telem_text_message_data_buffer[TELEM_NUM_BUFFERS][TELEM_TEXT_MESSAGE_MAX];
@@ -164,7 +164,7 @@ uint16_t next_message_number = 1;
 void frsky_send_text_message(char *msg) {
   uint8_t c;
   uint16_t dst_index = 0;
-  for(int i=0; i<strlen(msg); i++) {
+  for(uint i=0; i<strlen(msg); i++) {
     c = msg[i];
     if(c >= 32 && c <= 126) {
       telem_text_message_data_buffer[next_message_number % TELEM_NUM_BUFFERS][dst_index++] = c;

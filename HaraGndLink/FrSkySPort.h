@@ -128,9 +128,9 @@
 // https://github.com/opentx/opentx/blob/260da330c468f0c0e0090dc0ad11930046f3cc45/radio/src/telemetry/frsky.h#L206
 
 // What we want:
-//		Base:		Status: Armed/Disarmed
-//					Mode: Stabilized/Acro/Baro/GPS
-//					System Status
+//		Base:		Status: Armed/Disarmed				ok, base_mode (bitfield noch rausparsen)
+//					Mode: Stabilized/Acro/Baro/GPS		ok, base_mode 
+//					System Status						
 //					Mavlink Version
 //					Heading								ok (FC Heading)
 //					Angle Roll
@@ -142,14 +142,14 @@
 //		Vario:		Alt									ok
 //					Climbrate							ok
 //		GPS:		Date
-//					Type of Fix
-//					Number of Sats
-//					HDOP
-//					Speed
-//					Alt
-//					Course / Movement Direction
-//					Lat / Lon
-//		Current:	Current all
+//					Type of Fix							ok
+//					Number of Sats						ok
+//					HDOP								ok
+//					Speed								ok
+//					Alt									ok
+//					Course / Movement Direction			ok
+//					Lat / Lon							ok
+//		Current:	Current all		
 //					Voltage all
 //		Misc:		MotorOuts 1-4
 
