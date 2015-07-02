@@ -150,10 +150,8 @@ uint16_t telem_data_get_value(uint16_t telemetry_data_value_id) {
           return hdop_val;
           break;
       }
-      break;
-      
-      
-  }     
+      break;   
+  }  
 }
 
 char telem_text_message_data_buffer[TELEM_NUM_BUFFERS][TELEM_TEXT_MESSAGE_MAX];

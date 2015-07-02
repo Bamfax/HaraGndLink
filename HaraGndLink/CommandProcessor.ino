@@ -36,7 +36,7 @@ char *on_off(int v) {
 }
   
 void parse_debug_on_off(char* p, int *debug_var_ptr, char *name) {
-  int mode;
+//  int mode;
   
   if(strcmp(p, "on") == 0) {
     *debug_var_ptr = 1;
@@ -363,7 +363,7 @@ void do_set() {
 }
 
 void do_frsky() {
-  uint8_t n;
+//  uint8_t n;
   char* p;
   
   p = strtok(NULL, " ");
@@ -391,8 +391,8 @@ void do_factory() {
 }
 
 void do_command(char *cmd_buffer) {
-  int i = 0;
-  uint8_t c;
+//  int i = 0;
+//  uint8_t c;
   char* p;
   
   p = strtok(cmd_buffer, " ");

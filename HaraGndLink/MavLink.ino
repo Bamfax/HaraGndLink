@@ -120,11 +120,22 @@ void process_mavlink_packets() {
       switch(msg.msgid) {
 				
         case MAVLINK_MSG_ID_HEARTBEAT: 
-          debug_print(LOG_MAV_HEARTBEAT, "MAVLINK_MSG_ID_HEARTBEAT: base_mode: %d, custom_mode: %d", mavlink_msg_heartbeat_get_base_mode(&msg), mavlink_msg_heartbeat_get_custom_mode(&msg));            
-          add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_HEARTBEAT);
-          mav.base_mode = mavlink_msg_heartbeat_get_base_mode(&msg);
-          mav.custom_mode = mavlink_msg_heartbeat_get_custom_mode(&msg);
-          break;
+			debug_print(LOG_MAV_HEARTBEAT, "MAVLINK_MSG_ID_HEARTBEAT: base_mode: %d, custom_mode: %d", mavlink_msg_heartbeat_get_base_mode(&msg), mavlink_msg_heartbeat_get_custom_mode(&msg));            
+			add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_HEARTBEAT);
+			/* MAV_MODE_FLAG / base_mode Bit Meanings, from Mavlink common/common.h
+			  85         MAV_MODE_FLAG_CUSTOM_MODE_ENABLED=1,	// 0b00000001 Reserved for future use.
+			  86         MAV_MODE_FLAG_TEST_ENABLED=2,			// 0b00000010 system has a test mode enabled. This flag is intended for temporary system tests and should not be used for stable implementations.
+			  87         MAV_MODE_FLAG_AUTO_ENABLED=4,			// 0b00000100 autonomous mode enabled, system finds its own goal positions. Guided flag can be set or not, depends on the actual implementation.
+			  88         MAV_MODE_FLAG_GUIDED_ENABLED=8,		// 0b00001000 guided mode enabled, system flies MISSIONs / mission items.
+			  89         MAV_MODE_FLAG_STABILIZE_ENABLED=16,	// 0b00010000 system stabilizes electronically its attitude (and optionally position). It needs however further control inputs to move around.
+			  90         MAV_MODE_FLAG_HIL_ENABLED=32,			// 0b00100000 hardware in the loop simulation. All motors / actuators are blocked, but internal software is full operational.
+			  91         MAV_MODE_FLAG_MANUAL_INPUT_ENABLED=64, // 0b01000000 remote control input is enabled.
+			  92         MAV_MODE_FLAG_SAFETY_ARMED=128,		// 0b10000000 MAV safety set to armed. Motors are enabled / running / can start. Ready to fly.
+			  93         MAV_MODE_FLAG_ENUM_END=129,			//  | 
+			*/	  
+			mav.base_mode = mavlink_msg_heartbeat_get_base_mode(&msg);
+			mav.custom_mode = mavlink_msg_heartbeat_get_custom_mode(&msg);
+		break;
   
         case MAVLINK_MSG_ID_VFR_HUD:
 //					DEBUG_SERIAL.print("Entered VFR "); DEBUG_SERIAL.println();

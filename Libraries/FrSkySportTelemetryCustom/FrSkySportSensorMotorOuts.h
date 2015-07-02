@@ -9,7 +9,7 @@
 
 #include "FrSkySportSensor.h"
 
-#define RPM_DEFAULT_ID ID5
+#define RPM_DEFAULT_ID ID6
 #define RPM_DATA_COUNT 4
 #define RPM_ROT_DATA_ID1 0x0500
 #define RPM_ROT_DATA_ID2 0x0501

@@ -18,7 +18,7 @@ typedef struct MavClass {
   
   // MAVLINK_MSG_ID_GPS_RAW_INT 
   uint8_t    gps_fixtype;                // 0= No GPS, 1 = No Fix, 2 = 2D Fix, 3 = 3D Fix
-  uint8_t    gps_satellites_visible;     // number of visible satelites
+  uint8_t    gps_satellites_visible;     // number of visible satellites
   int32_t    gps_latitude;               // 585522540;
   int32_t    gps_longitude;              // 162344467;
   int32_t    gps_altitude;               // 1000 = 1m

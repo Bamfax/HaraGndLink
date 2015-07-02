@@ -33,7 +33,7 @@
 //
 //  A copy of the GNU General Public License is available at <http://www.gnu.org/licenses/>.
 */
-
+#pragma GCC diagnostic ignored "-Wwrite-strings"
 #include <GCS_MAVLink.h>
 #include "HaraGndLink.h"
 #include "Logger.h"
@@ -69,7 +69,7 @@ void setup() {
 }
 
 void loop() {
-  uint16_t len;
+//  uint16_t len;
   uint32_t current_milli;
 	
 	current_milli = millis();
@@ -80,7 +80,7 @@ void loop() {
 //    diags_update_led();
   }
 	
-	process_mavlink_packets();			// Get data from mavlink and process it
+	process_mavlink_packets();						// Get data from mavlink and process it
 	frsky_process();								// Prepare and send FrSky S.Port data
 	check_for_console_command();
 }
