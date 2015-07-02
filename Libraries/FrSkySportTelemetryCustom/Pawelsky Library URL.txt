@@ -1,0 +1,18 @@
+http://www.rcgroups.com/forums/showthread.php?t=2274401
+
+Custom version based on:
+
+FrSkySportTelemetry library changelog
+--------------------------------------
+Version 20150319
+  [FIX] corrected setting the 328p serial pin to the right mode when transmitting/receiving. This shall help when chaining the adapter with other sensors. Note that a 4.7kohm resistor is recommended to protect the S.Port data line.
+
+Version 20141129
+  [FIX] fixed incorrect display of GPS coordinates on 328p platform (caused by wrong usage of abs function)
+
+Version 20141120
+  [NEW] added support for 328P based boards (e.g. Pro Mini, Nano, Uno)
+  [NEW] added connection diagrams
+
+Version 20140914
+  initial version of the library
