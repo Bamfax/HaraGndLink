@@ -98,7 +98,17 @@ void frsky_process(void) {
 	
 	// Custom BaseVars Sensor
 	basevars.setData(	mav.base_mode,
-						mav.custom_mode);
+						mav.custom_mode,
+						mav.imu_xacc,
+						mav.imu_yacc,
+						mav.imu_zacc,
+						mav.imu_xgyro,
+						mav.imu_ygyro,
+						mav.imu_zgyro,
+						mav.imu_xmag,
+						mav.imu_ymag,
+						mav.imu_zmag
+						);
 	
   // Send the telemetry data, note that the data will only be sent for sensors
   // that are being polled at given moment

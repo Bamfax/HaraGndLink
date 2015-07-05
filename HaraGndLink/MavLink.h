@@ -36,6 +36,12 @@ typedef struct MavClass {
   int16_t    imu_xacc;
   int16_t    imu_yacc;
   int16_t    imu_zacc;
+  int16_t    imu_xgyro;
+  int16_t    imu_ygyro;
+  int16_t    imu_zgyro;
+  int16_t    imu_xmag;
+  int16_t    imu_ymag;
+  int16_t    imu_zmag;
 
   // MAVLINK_MSG_ID_ATTITUDE
   int32_t    roll_angle;                 // Roll angle (deg -180/180)

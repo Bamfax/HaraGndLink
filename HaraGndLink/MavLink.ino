@@ -193,7 +193,14 @@ void process_mavlink_packets() {
           mav.imu_xacc = mavlink_msg_raw_imu_get_xacc(&msg);
           mav.imu_yacc = mavlink_msg_raw_imu_get_yacc(&msg);
           mav.imu_zacc = mavlink_msg_raw_imu_get_zacc(&msg);
-          
+		  mav.imu_xgyro = mavlink_msg_raw_imu_get_xgyro(&msg);
+		  mav.imu_ygyro = mavlink_msg_raw_imu_get_ygyro(&msg);
+		  mav.imu_zgyro = mavlink_msg_raw_imu_get_zgyro(&msg);
+		  mav.imu_xmag = mavlink_msg_raw_imu_get_xmag(&msg);
+		  mav.imu_ymag = mavlink_msg_raw_imu_get_ymag(&msg);
+		  mav.imu_zmag = mavlink_msg_raw_imu_get_zmag(&msg);
+		  
+		  /* disabling averaging for now.
           uint16_t xacc_average, yacc_average, zacc_average;
           xacc_average = mavlink_get_average(mav.imu_xacc_buffer, mav.imu_xacc_buffer_start, mav.imu_xacc_buffer_length, 10, MAV_HISTORY_BUFFER_SIZE);
           yacc_average = mavlink_get_average(mav.imu_yacc_buffer, mav.imu_yacc_buffer_start, mav.imu_yacc_buffer_length, 10, MAV_HISTORY_BUFFER_SIZE);
@@ -209,8 +216,11 @@ void process_mavlink_packets() {
           mavlink_average_push(mav.imu_xacc_peak, mav.imu_xacc_peak_buffer, &(mav.imu_xacc_peak_buffer_start), &(mav.imu_xacc_peak_buffer_length), MAV_HISTORY_BUFFER_SIZE);
           mavlink_average_push(mav.imu_yacc_peak, mav.imu_yacc_peak_buffer, &(mav.imu_yacc_peak_buffer_start), &(mav.imu_yacc_peak_buffer_length), MAV_HISTORY_BUFFER_SIZE);
           mavlink_average_push(mav.imu_zacc_peak, mav.imu_zacc_peak_buffer, &(mav.imu_zacc_peak_buffer_start), &(mav.imu_zacc_peak_buffer_length), MAV_HISTORY_BUFFER_SIZE);
-
-          debug_print(LOG_MAV_IMU, "MAVLINK_MSG_ID_RAW_IMU: xacc: %d, yacc: %d, zacc: %d", mavlink_msg_raw_imu_get_xacc(&msg), mavlink_msg_raw_imu_get_yacc(&msg), mavlink_msg_raw_imu_get_zacc(&msg));
+		  */
+		  
+          debug_print(LOG_MAV_IMU, "MAVLINK_MSG_ID_RAW_IMU: xacc: %d, yacc: %d, zacc: %d", mav.imu_xacc, mav.imu_yacc, mav.imu_zacc);
+		  debug_print(LOG_MAV_IMU, "MAVLINK_MSG_ID_RAW_IMU: xgyro: %d, ygyro: %d, zgyro: %d", mav.imu_xgyro, mav.imu_ygyro, mav.imu_zgyro);
+		  debug_print(LOG_MAV_IMU, "MAVLINK_MSG_ID_RAW_IMU: xmag: %d, ymag: %d, zmag: %d", mav.imu_xmag, mav.imu_ymag, mav.imu_zmag);
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_RAW_IMU);
           break;
   
