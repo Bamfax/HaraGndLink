@@ -24,6 +24,7 @@ typedef struct MavClass {
   int32_t    gps_altitude;               // 1000 = 1m
   int32_t    gps_speed;                  // in cm/s
   uint16_t   gps_hdop;                   // GPS HDOP horizontal dilution of position in cm
+  uint16_t   gps_vdop;                   // GPS HDOP horizontal dilution of position in cm
   
   // MAVLINK_MSG_ID_VFR_HUD 
   uint32_t   groundspeed;                // Current ground speed in m/s

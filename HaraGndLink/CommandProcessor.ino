@@ -59,7 +59,8 @@ void do_dump() {
   console_print("Battery current:           %.2f\r\n", mav.battery_current / 100.0);
   console_print("Battery current average:   %.2f\r\n", mavlink_get_average(mav.battery_current_buffer, mav.battery_current_buffer_start, mav.battery_current_buffer_length, 10, MAV_HISTORY_BUFFER_SIZE) / 100.0);
   console_print("Battery percent remaining: %d\r\n", mav.battery_remaining);
-  console_print("HDOP:                      %.2f\r\n", mav.gps_hdop / 100.0);
+  console_print("HDOP:                      %.2f\r\n", mav.gps_hdop);
+  console_print("VDOP:                      %.2f\r\n", mav.gps_vdop);
   console_print("Satellites visible:        %d\r\n", mav.gps_satellites_visible);
   console_print("Temperature:               %d\r\n", mav.temperature);
   console_print("Mavlink imu:               x:%-4d y:%-4d z:%-4d\r\n", mav.imu_xacc, mav.imu_yacc, mav.imu_zacc);

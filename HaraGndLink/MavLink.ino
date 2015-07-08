@@ -173,6 +173,7 @@ void process_mavlink_packets() {
           if(mav.gps_fixtype == 3) {
             mav.gps_satellites_visible =  mavlink_msg_gps_raw_int_get_satellites_visible(&msg);      
             mav.gps_hdop = mavlink_msg_gps_raw_int_get_eph(&msg);                                    // hdop * 100
+			mav.gps_vdop = mavlink_msg_gps_raw_int_get_epv(&msg);
             mav.gps_latitude = mavlink_msg_gps_raw_int_get_lat(&msg);
             mav.gps_longitude = mavlink_msg_gps_raw_int_get_lon(&msg);
             mav.gps_altitude = mavlink_msg_gps_raw_int_get_alt(&msg);                                // 1m =1000
@@ -185,7 +186,7 @@ void process_mavlink_packets() {
             mav.gps_altitude = 0L;                       
             mav.gps_speed = 0L;                     
           }
-          debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: fixtype: %d, visiblesats: %d, gpsspeed: %f, hdop: %f, alt: %d", mav.gps_fixtype, mav.gps_satellites_visible, mavlink_msg_gps_raw_int_get_vel(&msg)/100.0, mav.gps_hdop/100.0, mavlink_msg_gps_raw_int_get_alt(&msg));            
+          debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: fixtype: %d, visiblesats: %d, gpsspeed: %f, hdop: %d, vdop: %d, alt: %d", mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_hdop, mav.gps_vdop, mav.gps_altitude);            
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT);
           break;
   
