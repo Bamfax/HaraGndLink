@@ -83,8 +83,8 @@ void frsky_process(void) {
 					mav.gps_longitude,		// lat / lon from mavlink, which is int32_t in centidegrees
 					mav.gps_altitude,		// Altitude in m (can be negative)
 					mav.gps_speed,			// Speed in m/s
-					mav.heading,			// Course over ground in degrees
-					mav.gps_hdop,			// HDOP, goood :)
+					mav.gps_cog/100,		// Course over ground in degrees
+					mav.gps_pdop,			// PDOP, goood :)
 					14, 9, 14,				// Date (year - 2000, month, day)
 					12, 00, 00);			// Time (hour, minute, second) - will be affected by timezone settings in your radio
 	// }
@@ -99,6 +99,7 @@ void frsky_process(void) {
 	// Custom BaseVars Sensor
 	basevars.setData(	mav.base_mode,
 						mav.custom_mode,
+						mav.heading,
 						mav.imu_xacc,
 						mav.imu_yacc,
 						mav.imu_zacc,

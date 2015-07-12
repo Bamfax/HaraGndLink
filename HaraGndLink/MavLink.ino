@@ -169,24 +169,27 @@ void process_mavlink_packets() {
           break;
   
         case MAVLINK_MSG_ID_GPS_RAW_INT:
-          mav.gps_fixtype = mavlink_msg_gps_raw_int_get_fix_type(&msg);                              // 0 = No GPS, 1 =No Fix, 2 = 2D Fix, 3 = 3D Fix
+          mav.gps_fixtype = mavlink_msg_gps_raw_int_get_fix_type(&msg);                             // 0 = No GPS, 1 =No Fix, 2 = 2D Fix, 3 = 3D Fix
           if(mav.gps_fixtype == 3) {
-            mav.gps_satellites_visible =  mavlink_msg_gps_raw_int_get_satellites_visible(&msg);      
-            mav.gps_hdop = mavlink_msg_gps_raw_int_get_eph(&msg);                                    // hdop * 100
+			mav.gps_time_usec = mavlink_msg_gps_raw_int_get_time_usec(&msg);
+            mav.gps_satellites_visible = mavlink_msg_gps_raw_int_get_satellites_visible(&msg);      
+            mav.gps_pdop = mavlink_msg_gps_raw_int_get_eph(&msg);                                   // pdop * 100
 			mav.gps_vdop = mavlink_msg_gps_raw_int_get_epv(&msg);
             mav.gps_latitude = mavlink_msg_gps_raw_int_get_lat(&msg);
             mav.gps_longitude = mavlink_msg_gps_raw_int_get_lon(&msg);
-            mav.gps_altitude = mavlink_msg_gps_raw_int_get_alt(&msg);                                // 1m =1000
-            mav.gps_speed = mavlink_msg_gps_raw_int_get_vel(&msg);                                   // 100 = 1m/s
+            mav.gps_altitude = mavlink_msg_gps_raw_int_get_alt(&msg);                               // 1m =1000
+            mav.gps_speed = mavlink_msg_gps_raw_int_get_vel(&msg);                                  // 100 = 1m/s
+			mav.gps_cog = mavlink_msg_gps_raw_int_get_cog(&msg);									// 100 = 1°
           } else {
             mav.gps_satellites_visible =  mavlink_msg_gps_raw_int_get_satellites_visible(&msg);      
-            mav.gps_hdop = 9999;
+            mav.gps_pdop = 9999;
             mav.gps_latitude = 0L;
             mav.gps_longitude = 0L;
             mav.gps_altitude = 0L;                       
             mav.gps_speed = 0L;                     
           }
-          debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: fixtype: %d, visiblesats: %d, gpsspeed: %f, hdop: %d, vdop: %d, alt: %d", mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_hdop, mav.gps_vdop, mav.gps_altitude);            
+          debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: time: %d, fixtype: %d, visiblesats: %d, gpsspeed: %f, pdop: %d, vdop: %d, alt: %d, cog: %d, lon: %d, lat: %d", 
+			mav.gps_time_usec, mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT);
           break;
   

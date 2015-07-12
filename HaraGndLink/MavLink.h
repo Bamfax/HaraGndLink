@@ -16,22 +16,24 @@ typedef struct MavClass {
   int16_t    battery_current;            //  10 = 1A
   int8_t     battery_remaining;          // Remaining battery energy: (0%: 0, 100%: 100), -1: autopilot estimate the remaining battery
   
-  // MAVLINK_MSG_ID_GPS_RAW_INT 
-  uint8_t    gps_fixtype;                // 0= No GPS, 1 = No Fix, 2 = 2D Fix, 3 = 3D Fix
-  uint8_t    gps_satellites_visible;     // number of visible satellites
-  int32_t    gps_latitude;               // 585522540;
-  int32_t    gps_longitude;              // 162344467;
-  int32_t    gps_altitude;               // 1000 = 1m
-  int32_t    gps_speed;                  // in cm/s
-  uint16_t   gps_hdop;                   // GPS HDOP horizontal dilution of position in cm
-  uint16_t   gps_vdop;                   // GPS HDOP horizontal dilution of position in cm
+  // MAVLINK_MSG_ID_GPS_RAW_INT
+  uint64_t	gps_time_usec; 
+  uint8_t	gps_fixtype;				// 0= No GPS, 1 = No Fix, 2 = 2D Fix, 3 = 3D Fix
+  uint8_t	gps_satellites_visible;		// number of visible satellites
+  int32_t	gps_latitude;				// 585522540;
+  int32_t	gps_longitude;				// 162344467;
+  int32_t	gps_altitude;				// 1000 = 1m
+  int32_t	gps_speed;					// in cm/s
+  uint16_t	gps_pdop;					// GPS positional dilution of position 
+  uint16_t	gps_vdop;					// GPS HDOP horizontal dilution of position in cm
+  uint16_t	gps_cog;					// ourse over ground (NOT heading, but direction of movement) in degrees * 100, 0.0..359.99 degrees. If unknown it is set to: 65535
   
   // MAVLINK_MSG_ID_VFR_HUD 
-  uint32_t   groundspeed;                // Current ground speed in m/s
-  uint32_t   heading;                    // Current heading in degrees, in compass units (0..360, 0=north)
-  uint16_t   throttle;                   // Current throttle setting in integer percent, 0 to 100
-  int32_t    bar_altitude;               // 100 = 1m
-  int32_t    ap_climb_rate;              // 100= 1m/s
+  uint32_t	groundspeed;				// Current ground speed in m/s
+  int16_t	heading;					// Current heading in degrees, in compass units (0..360, 0=north)
+  uint16_t	throttle;					// Current throttle setting in integer percent, 0 to 100
+  int32_t	bar_altitude;				// 100 = 1m
+  int32_t	ap_climb_rate;				// 100= 1m/s
   
   // MAVLINK_MSG_ID_RAW_IMU
   int16_t    imu_xacc;

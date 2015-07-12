@@ -59,9 +59,11 @@ void do_dump() {
   console_print("Battery current:           %.2f\r\n", mav.battery_current / 100.0);
   console_print("Battery current average:   %.2f\r\n", mavlink_get_average(mav.battery_current_buffer, mav.battery_current_buffer_start, mav.battery_current_buffer_length, 10, MAV_HISTORY_BUFFER_SIZE) / 100.0);
   console_print("Battery percent remaining: %d\r\n", mav.battery_remaining);
-  console_print("HDOP:                      %.2f\r\n", mav.gps_hdop);
-  console_print("VDOP:                      %.2f\r\n", mav.gps_vdop);
+  console_print("PDOP:                      %.2f\r\n", mav.gps_pdop);
+//  console_print("VDOP:                      %.2f\r\n", mav.gps_vdop);
   console_print("Satellites visible:        %d\r\n", mav.gps_satellites_visible);
+  console_print("Lat / Lon:					%d %d\r\n", mav.gps_latitude, mav.gps_longitude);
+  console_print("Course:					%d\r\n", mav.gps_cog);
   console_print("Temperature:               %d\r\n", mav.temperature);
   console_print("Mavlink imu:               x:%-4d y:%-4d z:%-4d\r\n", mav.imu_xacc, mav.imu_yacc, mav.imu_zacc);
   
@@ -83,26 +85,26 @@ void do_dump() {
 }
 
 void do_times() {
-  console_print("Mavlink heartbeat:         %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_HEARTBEAT));
-  console_print("Mavlink statustext:        %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_STATUSTEXT)); 
-  console_print("Mavlink sys status:        %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_SYS_STATUS));
-  console_print("Mavlink gps:               %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT));
-  console_print("Mavlink raw imu:           %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_RAW_IMU));
-  console_print("Mavlink hud:               %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_VFR_HUD)); 
-  console_print("Mavlink attitude:          %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_ATTITUDE));
-  console_print("Mavlink mission current:   %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_MISSION_CURRENT));
-  console_print("Mavlink scaled pressure:   %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_SCALED_PRESSURE));
-  console_print("Mavlink controller output: %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_CONTROLLER_OUTPUT));
-  console_print("FrSky vario:               %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_VARIO)); 
-  console_print("FrSky fas:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_FCS)); 
-  console_print("FrSky gps:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_GPS)); 
-  console_print("FrSky rpm:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_RPM)); 
+	console_print("Mavlink heartbeat:         %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_HEARTBEAT));
+	console_print("Mavlink statustext:        %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_STATUSTEXT));
+	console_print("Mavlink sys status:        %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_SYS_STATUS));
+	console_print("Mavlink gps:               %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT));
+	console_print("Mavlink raw imu:           %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_RAW_IMU));
+	console_print("Mavlink hud:               %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_VFR_HUD));
+	console_print("Mavlink attitude:          %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_ATTITUDE));
+	console_print("Mavlink mission current:   %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_MISSION_CURRENT));
+	console_print("Mavlink scaled pressure:   %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_SCALED_PRESSURE));
+	console_print("Mavlink controller output: %d\r\n", get_timestamp_delta(TIMESTAMP_MAVLINK_MSG_ID_CONTROLLER_OUTPUT));
+	console_print("FrSky vario:               %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_VARIO));
+	console_print("FrSky fas:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_FCS));
+	console_print("FrSky gps:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_GPS));
+	console_print("FrSky rpm:                 %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_RPM));
 	console_print("FrSky flvss:               %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_FLVSS));
-  console_print("FrSky other:               %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_OTHER)); 
+	console_print("FrSky other:               %d\r\n", get_timestamp_delta(TIMESTAMP_FRSKY_OTHER));
 }
 
 void do_msg(char* message_text) {
-  frsky_send_text_message(message_text);
+	frsky_send_text_message(message_text);
 }
 
 void do_map_dump() {

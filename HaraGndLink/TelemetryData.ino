@@ -143,7 +143,7 @@ uint16_t telem_data_get_value(uint16_t telemetry_data_value_id) {
           break;
         case EEPROM_VALUE_MAP_DATA_T2_HDOP:
           int16_t hdop_val;
-          hdop_val = mav.gps_hdop / 10;
+          hdop_val = mav.gps_pdop / 10;
           if(hdop_val > 100) {
             hdop_val = 100;
           }
