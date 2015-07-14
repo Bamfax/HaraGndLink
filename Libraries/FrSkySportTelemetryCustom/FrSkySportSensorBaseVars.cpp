@@ -10,10 +10,11 @@
 
 FrSkySportSensorBaseVars::FrSkySportSensorBaseVars(SensorId id) : FrSkySportSensor(id) { }
 
-void FrSkySportSensorBaseVars::setData(uint8_t base_mode, uint16_t custom_mode, int16_t xacc, int16_t yacc, int16_t zacc, int16_t xgyro, int16_t ygyro, int16_t zgyro, int16_t xmag, int16_t ymag, int16_t zmag)
+void FrSkySportSensorBaseVars::setData(uint8_t base_mode, uint16_t custom_mode, int16_t heading, int16_t xacc, int16_t yacc, int16_t zacc, int16_t xgyro, int16_t ygyro, int16_t zgyro, int16_t xmag, int16_t ymag, int16_t zmag)
 {
 	FrSkySportSensorBaseVars::base_mode = base_mode;
 	FrSkySportSensorBaseVars::custom_mode = custom_mode;
+  FrSkySportSensorBaseVars::heading = heading;
 	FrSkySportSensorBaseVars::xacc = xacc;
 	FrSkySportSensorBaseVars::yacc = yacc;
 	FrSkySportSensorBaseVars::zacc = zacc;

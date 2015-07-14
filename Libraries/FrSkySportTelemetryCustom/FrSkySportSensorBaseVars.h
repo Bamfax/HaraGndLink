@@ -29,12 +29,13 @@ class FrSkySportSensorBaseVars : public FrSkySportSensor
 {
   public:
     FrSkySportSensorBaseVars(SensorId id = BASEVARS_DEFAULT_ID);
-    void setData(uint8_t base_mode, uint16_t custom_mode, int16_t xacc, int16_t yacc, int16_t zacc, int16_t xgyro, int16_t ygyro, int16_t zgyro, int16_t xmag, int16_t ymag, int16_t zmag);
+    void setData(uint8_t base_mode, uint16_t custom_mode, int16_t heading, int16_t xacc, int16_t yacc, int16_t zacc, int16_t xgyro, int16_t ygyro, int16_t zgyro, int16_t xmag, int16_t ymag, int16_t zmag);
     virtual void send(FrSkySportSingleWireSerial& serial, uint8_t id);
 
   private:
     uint8_t base_mode;
     uint16_t custom_mode;
+	int16_t heading;
 	int16_t xacc;
 	int16_t yacc;
 	int16_t zacc;

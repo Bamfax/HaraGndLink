@@ -164,7 +164,7 @@ void process_mavlink_packets() {
           mavlink_average_push(mav.battery_voltage, mav.battery_voltage_buffer, &(mav.battery_voltage_buffer_start), &(mav.battery_voltage_buffer_length), MAV_HISTORY_BUFFER_SIZE);
           mavlink_average_push(mav.battery_current, mav.battery_current_buffer, &(mav.battery_current_buffer_start), &(mav.battery_current_buffer_length), MAV_HISTORY_BUFFER_SIZE);
           mav.battery_remaining = mavlink_msg_sys_status_get_battery_remaining(&msg); //battery capacity reported in %
-          debug_print(LOG_MAV_STATUS, "MAVLINK_MSG_ID_SYS_STATUS: voltage_battery: %d, current_battery: %d", mavlink_msg_sys_status_get_voltage_battery(&msg), mavlink_msg_sys_status_get_current_battery(&msg));            
+          debug_print(LOG_MAV_STATUS, "MAVLINK_MSG_ID_SYS_STATUS: voltage_battery: %d, current_battery: %d", mavlink_msg_sys_status_get_voltage_battery(&msg), mavlink_msg_sys_status_get_current_battery(&msg));
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_SYS_STATUS);
           break;
   
@@ -189,7 +189,7 @@ void process_mavlink_packets() {
             mav.gps_speed = 0L;                     
           }
           debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: time: %d, fixtype: %d, visiblesats: %d, gpsspeed: %f, pdop: %d, vdop: %d, alt: %d, cog: %d, lon: %d, lat: %d", 
-			mav.gps_time_usec, mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
+			(uint32_t)(mav.gps_time_usec/1000/1000), mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT);
           break;
   
