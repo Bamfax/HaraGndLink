@@ -52,6 +52,7 @@ int frsky_online() {
 }
 
 void frsky_process(void) {
+	time_t t = 0;
 //	uint8_t hdop_threshold;
 
 /*
@@ -73,20 +74,22 @@ void frsky_process(void) {
 
 	// GPS Sensor
 	add_timestamp(TIMESTAMP_FRSKY_GPS);
+	t = (uint64_t)(mav.gps_time_usec/1000000ULL);
+//	t = mav.gps_time_usec;
 	//		if(mavlink_gps_data_valid() && gps_first_position_good) {
 	// Set GPS data
 	gps.setData(	
 					// 48.858289, 2.294502,	// Latitude and longitude in degrees decimal (positive for N/E, negative for S/W) // removed Pawelsky code, as it is expecting true human float lat / lon values, but mavlink is throwing int32_t with centidegrees
 					mav.gps_fixtype,
 					mav.gps_satellites_visible,
-					mav.gps_latitude,		// lat / lon from mavlink, which is int32_t in centidegrees
-					mav.gps_longitude,		// lat / lon from mavlink, which is int32_t in centidegrees
-					mav.gps_altitude,		// Altitude in m (can be negative)
-					mav.gps_speed,			// Speed in m/s
-					mav.gps_cog/100,		// Course over ground in degrees
-					mav.gps_pdop,			// PDOP, goood :)
-					14, 9, 14,				// Date (year - 2000, month, day)
-					12, 00, 00);			// Time (hour, minute, second) - will be affected by timezone settings in your radio
+					mav.gps_latitude,						// lat / lon from mavlink, which is int32_t in centidegrees
+					mav.gps_longitude,						// lat / lon from mavlink, which is int32_t in centidegrees
+					mav.gps_altitude,						// Altitude in m (can be negative)
+					mav.gps_speed,							// Speed in m/s
+					mav.gps_cog/100,						// Course over ground in degrees
+					mav.gps_pdop,							// PDOP, goood :)
+					year(t)-2000, month(t), day(t),			// Date (year - 2000, month, day)
+					hour(t), minute(t), second(t));			// Time (hour, minute, second) - will be affected by timezone settings in your radio
 	// }
 	
 	// Custom MotorOuts Sensor (based on RPM Sensor)

@@ -35,6 +35,7 @@
 */
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 #include <GCS_MAVLink.h>
+#include <Time.h>
 #include "HaraGndLink.h"
 #include "Logger.h"
 #include "MavLink.h"

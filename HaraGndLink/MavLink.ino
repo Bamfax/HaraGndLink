@@ -189,7 +189,7 @@ void process_mavlink_packets() {
             mav.gps_speed = 0L;                     
           }
           debug_print(LOG_MAV_GPS, "MAVLINK_MSG_ID_GPS_RAW_INT: time: %d, fixtype: %d, visiblesats: %d, gpsspeed: %f, pdop: %d, vdop: %d, alt: %d, cog: %d, lon: %d, lat: %d", 
-			(uint32_t)(mav.gps_time_usec/1000/1000), mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
+			(uint32_t)(mav.gps_time_usec/1000000ULL), mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT);
           break;
   
