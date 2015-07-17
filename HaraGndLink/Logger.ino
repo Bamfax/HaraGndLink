@@ -6,6 +6,7 @@ int32_t current_time[MAX_TIMESTAMPS];
 int debugMavAllEnable = 0;
 int debugMavHeartbeatEnable = 0;
 int debugMavGpsEnable = 0;
+int debugMavServoEnable = 0;
 int debugMavImuEnable = 0;
 int debugMavHudEnable = 0;
 int debugMavAttitudeEnable = 0;
@@ -26,57 +27,63 @@ void debug_init() {
 }
 
 void debug_print(int subsystem, char* fmt, ...) {
-  int print_enable = 0;
-  switch(subsystem) {
-    case LOG_MAV_HEARTBEAT :
-      if(debugMavHeartbeatEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;    
-    case LOG_MAV_GPS :
-      if(debugMavGpsEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;    
-    case LOG_MAV_IMU :
-      if(debugMavImuEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;    
+	int print_enable = 0;
+	switch(subsystem) {
+	case LOG_MAV_HEARTBEAT :
+		if(debugMavHeartbeatEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;    
+	case LOG_MAV_GPS :
+		if(debugMavGpsEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;    
+	case LOG_MAV_SERVO :
+		if(debugMavServoEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_MAV_IMU :
+		if(debugMavImuEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;    
     case LOG_MAV_HUD :
       if(debugMavHudEnable || debugMavAllEnable) {
         print_enable = 1;
       }
-      break;        case LOG_MAV_ATTITUDE :
-      if(debugMavAttitudeEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;      
-    case LOG_MAV_STATUS :
-      if(debugMavStatusEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;    
-    case LOG_MAV_TEXT :
-      if(debugMavTextEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;
-    case LOG_MAV_OTHER :
-      if(debugMavOtherEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break; 
-     case LOG_FRSKY_RPM :
-      if(debugFrskyRpmEnable || debugFrskyAllEnable) {
-        print_enable = 1;
-      } 
-      break;         
-    case LOG_TEMP :
-      if(debugTempEnable) {
-        print_enable = 1;
-      }
-      break;      
+      break;        
+	case LOG_MAV_ATTITUDE :
+		if(debugMavAttitudeEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;      
+	case LOG_MAV_STATUS :
+		if(debugMavStatusEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;   
+	case LOG_MAV_TEXT :
+		if(debugMavTextEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_MAV_OTHER :
+		if(debugMavOtherEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_FRSKY_RPM :
+		if(debugFrskyRpmEnable || debugFrskyAllEnable) {
+			print_enable = 1;
+		}
+		break;   
+	case LOG_TEMP :
+		if(debugTempEnable) {
+			print_enable = 1;
+		}
+		break;  
   }
   if(print_enable) {
     char formatted_string[256];

@@ -35,6 +35,16 @@ typedef struct MavClass {
   int32_t	bar_altitude;				// 100 = 1m
   int32_t	ap_climb_rate;				// 100= 1m/s
   
+  // MAVLINK_MSG_ID_SERVO_OUTPUT_RAW
+  int16_t    motor1;
+  int16_t    motor2;
+  int16_t    motor3;
+  int16_t    motor4;
+  int16_t    motor5;
+  int16_t    motor6;
+  int16_t    motor7;
+  int16_t    motor8;
+  
   // MAVLINK_MSG_ID_RAW_IMU
   int16_t    imu_xacc;
   int16_t    imu_yacc;

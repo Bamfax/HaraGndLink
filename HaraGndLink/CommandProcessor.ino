@@ -8,7 +8,7 @@ int cmd_index = 0;
 
 void do_help() {
   console_print("%s\r\n", PRODUCT_STRING);
-  console_print("debug mav [all|heartbeat|gps|attitude|imu|hud|status|text|other] [on|off]\r\n"); 
+  console_print("debug mav [all|heartbeat|gps|attitude|servo|imu|hud|status|text|other] [on|off]\r\n"); 
   console_print("debug frsky [all|rpm] [on|off]\r\n"); 
   console_print("debug temp [on|off]\r\n"); 
   console_print("dump\r\n");
@@ -409,6 +409,7 @@ void do_command(char *cmd_buffer) {
 			parse_debug_on_off(p, &debugMavHeartbeatEnable, "Mav Heartbeat");
 			parse_debug_on_off(p, &debugMavGpsEnable, "Mav GPS");
 			parse_debug_on_off(p, &debugMavAttitudeEnable, "Mav Attitude");
+			parse_debug_on_off(p, &debugMavServoEnable, "Mav IMU");
 			parse_debug_on_off(p, &debugMavImuEnable, "Mav IMU");
 			parse_debug_on_off(p, &debugMavHudEnable, "Mav HUD");
 			parse_debug_on_off(p, &debugMavStatusEnable, "Mav Status");
@@ -423,7 +424,10 @@ void do_command(char *cmd_buffer) {
         } else if (strcmp(p, "attitude") == 0) {
             p = strtok(NULL, " ");
             parse_debug_on_off(p, &debugMavAttitudeEnable, "Mav Attitude");
-        } else if (strcmp(p, "imu") == 0) {
+        } else if (strcmp(p, "servo") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugMavServoEnable, "Mav Servo");
+		} else if (strcmp(p, "imu") == 0) {
             p = strtok(NULL, " ");
             parse_debug_on_off(p, &debugMavImuEnable, "Mav IMU");  
         } else if (strcmp(p, "hud") == 0) {

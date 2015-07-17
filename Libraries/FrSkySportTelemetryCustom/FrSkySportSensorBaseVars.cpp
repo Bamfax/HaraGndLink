@@ -14,7 +14,7 @@ void FrSkySportSensorBaseVars::setData(uint8_t base_mode, uint16_t custom_mode, 
 {
 	FrSkySportSensorBaseVars::base_mode = base_mode;
 	FrSkySportSensorBaseVars::custom_mode = custom_mode;
-  FrSkySportSensorBaseVars::heading = heading;
+	FrSkySportSensorBaseVars::heading = heading;
 	FrSkySportSensorBaseVars::xacc = xacc;
 	FrSkySportSensorBaseVars::yacc = yacc;
 	FrSkySportSensorBaseVars::zacc = zacc;
@@ -39,31 +39,34 @@ void FrSkySportSensorBaseVars::send(FrSkySportSingleWireSerial& serial, uint8_t 
 			serial.sendData(BASEVARS_CUSTOMMODE_DATA_ID2, custom_mode);
 			break;
 		case 2:
-			serial.sendData(BASEVARS_XACC_DATA_ID3, xacc);
+			serial.sendData(BASEVARS_HEADING_DATA_ID3, xacc);
 			break;
 		case 3:
-			serial.sendData(BASEVARS_YACC_DATA_ID4, yacc);
+			serial.sendData(BASEVARS_XACC_DATA_ID4, xacc);
 			break;
 		case 4:
-			serial.sendData(BASEVARS_ZACC_DATA_ID5, zacc);
+			serial.sendData(BASEVARS_YACC_DATA_ID5, yacc);
 			break;
 		case 5:
-			serial.sendData(BASEVARS_XGYRO_DATA_ID6, xgyro);
+			serial.sendData(BASEVARS_ZACC_DATA_ID6, zacc);
 			break;
 		case 6:
-			serial.sendData(BASEVARS_YGYRO_DATA_ID7, ygyro);
+			serial.sendData(BASEVARS_XGYRO_DATA_ID7, xgyro);
 			break;
 		case 7:
-			serial.sendData(BASEVARS_ZGYRO_DATA_ID8, zgyro);
+			serial.sendData(BASEVARS_YGYRO_DATA_ID8, ygyro);
 			break;
 		case 8:
-			serial.sendData(BASEVARS_XMAG_DATA_ID9, xmag);
+			serial.sendData(BASEVARS_ZGYRO_DATA_ID9, zgyro);
 			break;
 		case 9:
-			serial.sendData(BASEVARS_YMAG_DATA_ID10, ymag);
+			serial.sendData(BASEVARS_XMAG_DATA_ID10, xmag);
 			break;
 		case 10:
-			serial.sendData(BASEVARS_ZMAG_DATA_ID11, zmag);
+			serial.sendData(BASEVARS_YMAG_DATA_ID11, ymag);
+			break;
+		case 11:
+			serial.sendData(BASEVARS_ZMAG_DATA_ID12, zmag);
 			break;
     }
     sensorDataIdx++;

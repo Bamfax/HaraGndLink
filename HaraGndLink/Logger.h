@@ -1,15 +1,16 @@
 #ifndef LOGGER
 #define LOGGER
 
-#define LOG_MAV_HEARTBEAT 1
-#define LOG_MAV_GPS       2
-#define LOG_MAV_ATTITUDE  3
-#define LOG_MAV_IMU       4
-#define LOG_MAV_HUD       5
-#define LOG_MAV_STATUS    6
-#define LOG_MAV_TEXT      7
-#define LOG_MAV_OTHER     8
-#define LOG_MAV_UNKNOWN   9
+#define LOG_MAV_HEARTBEAT	1
+#define LOG_MAV_GPS			2
+#define LOG_MAV_ATTITUDE	3
+#define LOG_MAV_IMU			4
+#define LOG_MAV_HUD			5
+#define LOG_MAV_STATUS		6
+#define LOG_MAV_TEXT		7
+#define LOG_MAV_SERVO		8
+#define LOG_MAV_OTHER		9
+#define LOG_MAV_UNKNOWN		10
 
 #define LOG_FRSKY_RPM     30
 #define LOG_TEMP          40
@@ -37,6 +38,7 @@
 extern int debugMavAllEnable;
 extern int debugMavHeartbeatEnable;
 extern int debugMavGpsEnable;
+extern int debugMavServoEnable;
 extern int debugMavImuEnable;
 extern int debugMavAttitudeEnable;
 extern int debugMavHudEnable;

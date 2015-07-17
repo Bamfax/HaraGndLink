@@ -192,17 +192,29 @@ void process_mavlink_packets() {
 			(uint32_t)(mav.gps_time_usec/1000000ULL), mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_speed/100.0, mav.gps_pdop, mav.gps_vdop, mav.gps_altitude, mav.gps_cog, mav.gps_longitude, mav.gps_latitude);
           add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_GPS_RAW_INT);
           break;
+		  
+		case MAVLINK_MSG_ID_SERVO_OUTPUT_RAW:
+			mav.motor1 = mavlink_msg_servo_output_raw_get_servo1_raw(&msg);
+			mav.motor2 = mavlink_msg_servo_output_raw_get_servo2_raw(&msg);
+			mav.motor3 = mavlink_msg_servo_output_raw_get_servo3_raw(&msg);
+			mav.motor4 = mavlink_msg_servo_output_raw_get_servo4_raw(&msg);
+			mav.motor5 = mavlink_msg_servo_output_raw_get_servo5_raw(&msg);
+			mav.motor6 = mavlink_msg_servo_output_raw_get_servo6_raw(&msg);
+			mav.motor7 = mavlink_msg_servo_output_raw_get_servo7_raw(&msg);
+			mav.motor8 = mavlink_msg_servo_output_raw_get_servo8_raw(&msg);
+			debug_print(LOG_MAV_SERVO, "MAVLINK_MSG_ID_SERVO_OUTPUT_RAW: m1: %d, m2: %d, m3: %d, m4: %d, m5: %d, m6: %d, m7: %d, m8: %d", mav.motor1, mav.motor2, mav.motor3, mav.motor4, mav.motor5, mav.motor6, mav.motor7, mav.motor8);
+			break;
   
         case MAVLINK_MSG_ID_RAW_IMU:
-          mav.imu_xacc = mavlink_msg_raw_imu_get_xacc(&msg);
-          mav.imu_yacc = mavlink_msg_raw_imu_get_yacc(&msg);
-          mav.imu_zacc = mavlink_msg_raw_imu_get_zacc(&msg);
-		  mav.imu_xgyro = mavlink_msg_raw_imu_get_xgyro(&msg);
-		  mav.imu_ygyro = mavlink_msg_raw_imu_get_ygyro(&msg);
-		  mav.imu_zgyro = mavlink_msg_raw_imu_get_zgyro(&msg);
-		  mav.imu_xmag = mavlink_msg_raw_imu_get_xmag(&msg);
-		  mav.imu_ymag = mavlink_msg_raw_imu_get_ymag(&msg);
-		  mav.imu_zmag = mavlink_msg_raw_imu_get_zmag(&msg);
+			mav.imu_xacc = mavlink_msg_raw_imu_get_xacc(&msg);
+			mav.imu_yacc = mavlink_msg_raw_imu_get_yacc(&msg);
+			mav.imu_zacc = mavlink_msg_raw_imu_get_zacc(&msg);
+			mav.imu_xgyro = mavlink_msg_raw_imu_get_xgyro(&msg);
+			mav.imu_ygyro = mavlink_msg_raw_imu_get_ygyro(&msg);
+			mav.imu_zgyro = mavlink_msg_raw_imu_get_zgyro(&msg);
+			mav.imu_xmag = mavlink_msg_raw_imu_get_xmag(&msg);
+			mav.imu_ymag = mavlink_msg_raw_imu_get_ymag(&msg);
+			mav.imu_zmag = mavlink_msg_raw_imu_get_zmag(&msg);
 		  
 		  /* disabling averaging for now.
           uint16_t xacc_average, yacc_average, zacc_average;

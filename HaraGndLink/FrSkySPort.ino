@@ -94,10 +94,10 @@ void frsky_process(void) {
 	
 	// Custom MotorOuts Sensor (based on RPM Sensor)
 	add_timestamp(TIMESTAMP_FRSKY_RPM);
-	motorouts.setData(	200,    
-						25.6,   
-						-7.8,
-						-7.8);
+	motorouts.setData(	mav.motor1,    
+						mav.motor2,   
+						mav.motor3,
+						mav.motor4);
 	
 	// Custom BaseVars Sensor
 	basevars.setData(	mav.base_mode,

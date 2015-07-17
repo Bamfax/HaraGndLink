@@ -16,7 +16,7 @@ void FrSkySportSensorGps::setData(uint8_t fixtype, uint8_t satellites_visible, i
   FrSkySportSensorGps::satellites_visible = satellites_visible;
   FrSkySportSensorGps::lat = setLatLon(lat, true);
   FrSkySportSensorGps::lon = setLatLon(lon, false);
-  FrSkySportSensorGps::cog = cog * 100;
+  FrSkySportSensorGps::cog = cog;
   FrSkySportSensorGps::speed = speed * 1944; // Convert m/s to knots
   FrSkySportSensorGps::alt = alt * 100;
   FrSkySportSensorGps::hdop = hdop;
