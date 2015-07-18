@@ -2,7 +2,7 @@
 Custom Telemetry converter adapted for Harakiri TestCode3 and OpenTX 2.1. Needs a Teensy 3.1.
 
 HaraGndLink - Haraki Ground Link
-(c) Bamfax 21.06.2015
+by Bamfax 21.06.2015
 v0.1 - first ugly draft, still work in progress. Do not use.
 Not for commercial use
 
