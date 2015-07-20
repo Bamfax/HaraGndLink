@@ -4,15 +4,16 @@
 #include "FrSkySportSensorMotorOuts.h"
 #include "FrSkySportSensorVario.h"
 #include "FrSkySportSensorGps.h"
+#include "FrSkySportSensorFcs.h"
 #include "FrSkySportSensor.h"
 #include "FrSkySportSingleWireSerial.h"
 #include "FrSkySportTelemetry.h"
 
-// FrSkySportSensorFcs fcs;                               // Create FCS sensor with default ID
 // FrSkySportSensorFlvss flvss1;                          // Create FLVSS sensor with default ID
 // FrSkySportSensorFlvss flvss2(FrSkySportSensor::ID15);  // Create FLVSS sensor with given ID
 // FrSkySportSensorRpm rpm;                               // Create RPM sensor with default ID
-FrSkySportSensorGps gps;                               // Create GPS sensor with default ID
+FrSkySportSensorFcs fcs;								// Create FCS sensor with default ID
+FrSkySportSensorGps gps;								// Create GPS sensor with default ID
 FrSkySportSensorVario vario;							// Create Variometer sensor with default ID
 FrSkySportSensorMotorOuts motorouts;					// Create MotorOuts sensor with default ID
 FrSkySportSensorBaseVars basevars;						// Create BaseVars sensor with default ID
@@ -40,7 +41,7 @@ float scalefactor = 360.0/((362.0/360.0)*256.0);
 void frsky_init(void)  {
 	// Configure the telemetry serial port and sensors (remember to use & to specify a pointer to sensor)
 	// telemetry.begin(FRSKY_SERIAL, &fcs, &flvss1, &flvss2, &gps, &rpm, &vario);
-  telemetry.begin(FRSKY_SERIAL, &gps, &vario, &motorouts, &basevars);
+  telemetry.begin(FRSKY_SERIAL, &vario, &fcs, &gps, &motorouts, &basevars);
 }
 
 int frsky_online() {  
@@ -71,6 +72,10 @@ void frsky_process(void) {
 		vario.setData(	mav.bar_altitude,  // Altitude in Meters (can be negative)
 						mav.ap_climb_rate);  // Vertical speed in m/s (positive - up, negative - down)
 	}
+	
+	fcs.setData(	current,							// Current consumption in amps
+					12.6);								// Battery voltage in volts
+	debug_print(LOG_FRSKY_MOTOROUTS, "FRSKY MOTOROUTS: Current: %f, Voltage: %f", current, 12.6); 
 
 	// GPS Sensor
 	add_timestamp(TIMESTAMP_FRSKY_GPS);

@@ -9,7 +9,7 @@ int cmd_index = 0;
 void do_help() {
   console_print("%s\r\n", PRODUCT_STRING);
   console_print("debug mav [all|heartbeat|gps|attitude|servo|imu|hud|status|text|other] [on|off]\r\n"); 
-  console_print("debug frsky [all|rpm] [on|off]\r\n"); 
+  console_print("debug frsky [all|motorouts|gps|basevars|vario|fcs] [on|off]\r\n"); 
   console_print("debug temp [on|off]\r\n"); 
   console_print("dump\r\n");
   console_print("timing\r\n");
@@ -448,16 +448,28 @@ void do_command(char *cmd_buffer) {
       } else if(strcmp(p, "frsky") == 0) {
         p = strtok(NULL, " ");
         if(strcmp(p, "all") == 0) {
-            p = strtok(NULL, " ");
-            parse_debug_on_off(p, &debugFrskyAllEnable, "FrSky All");
-        } else if (strcmp(p, "rpm") == 0) {
-            p = strtok(NULL, " ");
-            parse_debug_on_off(p, &debugFrskyRpmEnable, "FrSky RPM");
-        } 
-      } else if(strcmp(p, "temp") == 0) {
-        p = strtok(NULL, " ");
-        parse_debug_on_off(p, &debugTempEnable, "Temp");
-      }
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyAllEnable, "FrSky All");
+		} else if (strcmp(p, "motorouts") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyMotoroutsEnable, "FrSky MotorOuts");
+		} else if (strcmp(p, "gps") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyGpsEnable, "FrSky GPS");
+		} else if (strcmp(p, "basevars") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyBasevarsEnable, "FrSky BaseVars");
+		} else if (strcmp(p, "vario") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyVarioEnable, "FrSky Vario");
+		} else if (strcmp(p, "fcs") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugFrskyFcsEnable, "FrSky FCS");
+		}
+		} else if(strcmp(p, "temp") == 0) {
+			p = strtok(NULL, " ");
+			parse_debug_on_off(p, &debugTempEnable, "Temp");
+		}
     } else if(strcmp(p, "dump") == 0) {
       do_dump();
     } else if(strcmp(p, "timing") == 0) {

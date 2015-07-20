@@ -12,8 +12,12 @@
 #define LOG_MAV_OTHER		9
 #define LOG_MAV_UNKNOWN		10
 
-#define LOG_FRSKY_RPM     30
-#define LOG_TEMP          40
+#define LOG_FRSKY_MOTOROUTS	30
+#define LOG_FRSKY_GPS		31
+#define LOG_FRSKY_BASEVARS	32
+#define LOG_FRSKY_VARIO		33
+#define LOG_FRSKY_FCS		34
+#define LOG_TEMP			40
 
 #define MAX_TIMESTAMPS 16
 #define TIMESTAMP_MAVLINK_MSG_ID_HEARTBEAT         0
@@ -46,7 +50,11 @@ extern int debugMavStatusEnable;
 extern int debugMavTextEnable;
 extern int debugMavOtherEnable;
 extern int debugFrskyAllEnable;
-extern int debugFrskyRpmEnable;
+extern int debugFrskyMotoroutsEnable;
+extern int debugFrskyGpsEnable;
+extern int debugFrskyBasevarsEnable;
+extern int debugFrskyVarioEnable;
+extern int debugFrskyFcsEnable;
 extern int debugTempEnable;
 
 void debug_print(int subsystem, char* fmt, ...);

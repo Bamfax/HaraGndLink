@@ -2,6 +2,7 @@
 
 int32_t previous_time[MAX_TIMESTAMPS];
 int32_t current_time[MAX_TIMESTAMPS];
+int32_t lastmillis = 0;	
 
 int debugMavAllEnable = 0;
 int debugMavHeartbeatEnable = 0;
@@ -14,7 +15,11 @@ int debugMavStatusEnable = 0;
 int debugMavTextEnable = 0;
 int debugMavOtherEnable = 0;
 int debugFrskyAllEnable = 0;
-int debugFrskyRpmEnable = 0;
+int debugFrskyMotoroutsEnable = 0;
+int debugFrskyGpsEnable = 0;
+int debugFrskyBasevarsEnable = 0;
+int debugFrskyVarioEnable = 0;
+int debugFrskyFcsEnable = 0;
 int debugTempEnable = 0;
 
 void debug_init() {
@@ -50,10 +55,10 @@ void debug_print(int subsystem, char* fmt, ...) {
 		}
 		break;    
     case LOG_MAV_HUD :
-      if(debugMavHudEnable || debugMavAllEnable) {
-        print_enable = 1;
-      }
-      break;        
+		if(debugMavHudEnable || debugMavAllEnable) {
+			print_enable = 1;
+		}
+		break;       
 	case LOG_MAV_ATTITUDE :
 		if(debugMavAttitudeEnable || debugMavAllEnable) {
 			print_enable = 1;
@@ -74,11 +79,31 @@ void debug_print(int subsystem, char* fmt, ...) {
 			print_enable = 1;
 		}
 		break;
-	case LOG_FRSKY_RPM :
-		if(debugFrskyRpmEnable || debugFrskyAllEnable) {
+	case LOG_FRSKY_MOTOROUTS :
+		if(debugFrskyMotoroutsEnable || debugFrskyAllEnable) {
 			print_enable = 1;
 		}
-		break;   
+		break;
+	case LOG_FRSKY_GPS :
+		if(debugFrskyGpsEnable || debugFrskyAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_FRSKY_BASEVARS :
+		if(debugFrskyBasevarsEnable || debugFrskyAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_FRSKY_VARIO :
+		if(debugFrskyVarioEnable || debugFrskyAllEnable) {
+			print_enable = 1;
+		}
+		break;
+	case LOG_FRSKY_FCS :
+		if(debugFrskyFcsEnable || debugFrskyAllEnable) {
+			print_enable = 1;
+		}
+		break;
 	case LOG_TEMP :
 		if(debugTempEnable) {
 			print_enable = 1;
@@ -86,12 +111,15 @@ void debug_print(int subsystem, char* fmt, ...) {
 		break;  
   }
   if(print_enable) {
-    char formatted_string[256];
-    va_list argptr;
-    va_start(argptr, fmt);
-    vsprintf(formatted_string, fmt, argptr);
-    va_end(argptr);
-    console_print("%d \t%s\r\n", millis(), formatted_string);
+	if ((millis() - lastmillis) > 250) {
+		lastmillis = millis();
+		char formatted_string[256];
+		va_list argptr;
+		va_start(argptr, fmt);
+		vsprintf(formatted_string, fmt, argptr);
+		va_end(argptr);
+		console_print("%d \t%s\r\n", millis(), formatted_string);
+	}
   }
 }
 
