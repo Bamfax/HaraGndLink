@@ -40,10 +40,10 @@ void parse_debug_on_off(char* p, int *debug_var_ptr, char *name) {
   
   if(strcmp(p, "on") == 0) {
     *debug_var_ptr = 1;
-    console_print("%s on\r\n", *name);
+    console_print("%s on\r\n", name);
   } else if(strcmp(p, "off") == 0) {
     *debug_var_ptr = 0;
-    console_print("%s off\r\n", *name);
+    console_print("%s off\r\n", name);
   } else if(p == NULL) {
     console_print("%s\r\n", on_off(*debug_var_ptr));
   } else {
@@ -449,7 +449,11 @@ void do_command(char *cmd_buffer) {
         p = strtok(NULL, " ");
         if(strcmp(p, "all") == 0) {
 			p = strtok(NULL, " ");
-			parse_debug_on_off(p, &debugFrskyAllEnable, "FrSky All");
+			parse_debug_on_off(p, &debugFrskyMotoroutsEnable, "FrSky MotorOuts");
+			parse_debug_on_off(p, &debugFrskyGpsEnable, "FrSky GPS");
+			parse_debug_on_off(p, &debugFrskyBasevarsEnable, "FrSky BaseVars");
+			parse_debug_on_off(p, &debugFrskyVarioEnable, "FrSky Vario");
+			parse_debug_on_off(p, &debugFrskyFcsEnable, "FrSky FCS");
 		} else if (strcmp(p, "motorouts") == 0) {
 			p = strtok(NULL, " ");
 			parse_debug_on_off(p, &debugFrskyMotoroutsEnable, "FrSky MotorOuts");

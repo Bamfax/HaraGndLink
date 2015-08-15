@@ -12,7 +12,7 @@
 // FrSkySportSensorFlvss flvss1;                          // Create FLVSS sensor with default ID
 // FrSkySportSensorFlvss flvss2(FrSkySportSensor::ID15);  // Create FLVSS sensor with given ID
 // FrSkySportSensorRpm rpm;                               // Create RPM sensor with default ID
-//FrSkySportSensorFcs fcs;								// Create FCS sensor with default ID
+FrSkySportSensorFcs fcs;								// Create FCS sensor with default ID
 FrSkySportSensorGps gps;								// Create GPS sensor with default ID
 FrSkySportSensorVario vario;							// Create Variometer sensor with default ID
 FrSkySportSensorMotorOuts motorouts;					// Create MotorOuts sensor with default ID
@@ -41,8 +41,8 @@ float scalefactor = 360.0/((362.0/360.0)*256.0);
 void frsky_init(void)  {
 	// Configure the telemetry serial port and sensors (remember to use & to specify a pointer to sensor)
 	// telemetry.begin(FRSKY_SERIAL, &fcs, &flvss1, &flvss2, &gps, &rpm, &vario);
-	//telemetry.begin(FRSKY_SERIAL, &vario, &fcs, &gps, &motorouts, &basevars);
-	telemetry.begin(FRSKY_SERIAL, &vario, &gps, &motorouts, &basevars);
+	telemetry.begin(FRSKY_SERIAL, &vario, &fcs, &gps, &motorouts, &basevars);
+	//telemetry.begin(FRSKY_SERIAL, &vario, &gps, &motorouts, &basevars);
 }
 
 int frsky_online() {  
@@ -70,21 +70,19 @@ void frsky_process(void) {
 	if(mavlink_vfr_data_valid()) {
 		// Set variometer data
 		// (set Variometer source to VSpd in menu to use the vertical speed data from this sensor for variometer).
-		vario.setData(	mav.bar_altitude,  // Altitude in Meters (can be negative)
-						mav.ap_climb_rate);  // Vertical speed in m/s (positive - up, negative - down)
+		vario.setData(	mav.bar_altitude,				// Altitude in Meters (can be negative)
+						mav.ap_climb_rate);				// Vertical speed in m/s (positive - up, negative - down)
 	}
+	debug_print(LOG_FRSKY_VARIO, "FRSKY VARIO: Alt: %f, Climb rate: %f", mav.bar_altitude, mav.ap_climb_rate);
 	
-	/*
 	fcs.setData(	current,							// Current consumption in amps
-					12.6);								// Battery voltage in volts
-	debug_print(LOG_FRSKY_MOTOROUTS, "FRSKY MOTOROUTS: Current: %f, Voltage: %f", current, 12.6); 
-*/
+					voltage);							// Battery voltage in volts
+	debug_print(LOG_FRSKY_FCS, "FRSKY FCS: Current: %f, Voltage: %f", current, voltage); 
 
 	// GPS Sensor
 	add_timestamp(TIMESTAMP_FRSKY_GPS);
 	t = (uint64_t)(mav.gps_time_usec/1000000ULL);
-//	t = mav.gps_time_usec;
-	//		if(mavlink_gps_data_valid() && gps_first_position_good) {
+	//t = mav.gps_time_usec;
 	// Set GPS data
 	gps.setData(	
 					// 48.858289, 2.294502,	// Latitude and longitude in degrees decimal (positive for N/E, negative for S/W) // removed Pawelsky code, as it is expecting true human float lat / lon values, but mavlink is throwing int32_t with centidegrees
@@ -93,12 +91,12 @@ void frsky_process(void) {
 					mav.gps_latitude,						// lat / lon from mavlink, which is int32_t in centidegrees
 					mav.gps_longitude,						// lat / lon from mavlink, which is int32_t in centidegrees
 					mav.gps_altitude,						// Altitude in m (can be negative)
-					mav.gps_speed,							// Speed in m/s
+					(float)mav.gps_speed,					// Speed in m/s
 					mav.gps_cog/100,						// Course over ground in degrees
 					mav.gps_pdop,							// PDOP, goood :)
 					year(t)-2000, month(t), day(t),			// Date (year - 2000, month, day)
 					hour(t), minute(t), second(t));			// Time (hour, minute, second) - will be affected by timezone settings in your radio
-	// }
+	debug_print(LOG_FRSKY_GPS, "FRSKY GPS: Fixtype: %d, SatsVis: %d, Lat: %d, Lon: %d, Alt: %d, Speed: %d, PDOP: %d, Date: %d.%d.%d %d:%d:%d", mav.gps_fixtype, mav.gps_satellites_visible, mav.gps_latitude, mav.gps_longitude, mav.gps_altitude, mav.gps_speed, mav.gps_cog/100, mav.gps_pdop, day(t), month(t), (year(t)-2000), hour(t), minute(t), second(t));
 	
 	// Custom MotorOuts Sensor (based on RPM Sensor)
 	add_timestamp(TIMESTAMP_FRSKY_RPM);
@@ -106,11 +104,12 @@ void frsky_process(void) {
 						mav.motor2,   
 						mav.motor3,
 						mav.motor4);
+	debug_print(LOG_FRSKY_MOTOROUTS, "FRSKY MOTOROUTS: Motor1: %d, Motor2: %d, Motor3: %d, Motor4: %d", mav.motor1, mav.motor2, mav.motor3, mav.motor4); 
 	
 	// Custom BaseVars Sensor
 	basevars.setData(	mav.base_mode,
 						mav.custom_mode,
-						mav.heading,
+						mav.heading*100,
 						mav.imu_xacc,
 						mav.imu_yacc,
 						mav.imu_zacc,
@@ -121,6 +120,7 @@ void frsky_process(void) {
 						mav.imu_ymag,
 						mav.imu_zmag
 						);
+	debug_print(LOG_FRSKY_BASEVARS, "FRSKY BASEVARS: Basemode: %d, Custom mode: %d, Heading: %d", mav.base_mode, mav.custom_mode, mav.heading*100);
 	
   // Send the telemetry data, note that the data will only be sent for sensors
   // that are being polled at given moment

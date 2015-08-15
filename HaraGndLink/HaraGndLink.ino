@@ -47,6 +47,7 @@ uint32_t next_1000_loop = 0L;
 uint32_t next_200_loop = 0L;
 uint32_t next_100_loop = 0L;
 float current = 0;
+float voltage = 0;
 
 void console_print(char* fmt, ...) {
     char formatted_string[256];

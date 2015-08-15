@@ -141,11 +141,11 @@ void process_mavlink_packets() {
 //					DEBUG_SERIAL.print("Entered VFR "); DEBUG_SERIAL.println();
 //					DEBUG_SERIAL.print("Heading: "); DEBUG_SERIAL.print(mavlink_msg_vfr_hud_get_heading(&msg)); DEBUG_SERIAL.println();
 //          debug_print(LOG_MAV_HUD, "MAVLINK_MSG_ID_VFR_HUD: groundspeed: %d, heading: %d, throttle: %d, alt: %d, climbrate: %d", mavlink_msg_vfr_hud_get_groundspeed(&msg), mavlink_msg_vfr_hud_get_heading(&msg), mavlink_msg_vfr_hud_get_throttle(&msg), mavlink_msg_vfr_hud_get_alt(&msg), mavlink_msg_vfr_hud_get_climb(&msg));            
-			mav.groundspeed = mavlink_msg_vfr_hud_get_groundspeed(&msg);      // 100 = 1m/s
-			mav.heading = mavlink_msg_vfr_hud_get_heading(&msg);              // 100 = 100 deg
-			mav.throttle = mavlink_msg_vfr_hud_get_throttle(&msg);            //  100 = 100%
-			mav.bar_altitude = mavlink_msg_vfr_hud_get_alt(&msg) * 100;       //  m
-			mav.ap_climb_rate=mavlink_msg_vfr_hud_get_climb(&msg) * 100;      //  m/s
+			mav.groundspeed = mavlink_msg_vfr_hud_get_groundspeed(&msg);		// 100 = 1m/s
+			mav.heading = mavlink_msg_vfr_hud_get_heading(&msg);				// 100 = 100 deg
+			mav.throttle = mavlink_msg_vfr_hud_get_throttle(&msg);				//  100 = 100%
+			mav.bar_altitude = mavlink_msg_vfr_hud_get_alt(&msg);				//  100 = 1m
+			mav.ap_climb_rate = mavlink_msg_vfr_hud_get_climb(&msg);			//  m/s
 			debug_print(LOG_MAV_HUD, "MAVLINK_MSG_ID_VFR_HUD: groundspeed: %d, heading: %d, throttle: %d, alt: %d, climbrate: %d", mav.groundspeed, mav.heading, mav.throttle, mav.bar_altitude, mav.ap_climb_rate);            
 			add_timestamp(TIMESTAMP_MAVLINK_MSG_ID_VFR_HUD);
           break; 

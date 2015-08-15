@@ -39,7 +39,7 @@ void FrSkySportSensorBaseVars::send(FrSkySportSingleWireSerial& serial, uint8_t 
 			serial.sendData(BASEVARS_CUSTOMMODE_DATA_ID2, custom_mode);
 			break;
 		case 2:
-			serial.sendData(BASEVARS_HEADING_DATA_ID3, xacc);
+			serial.sendData(BASEVARS_HEADING_DATA_ID3, heading);
 			break;
 		case 3:
 			serial.sendData(BASEVARS_XACC_DATA_ID4, xacc);
@@ -59,7 +59,7 @@ void FrSkySportSensorBaseVars::send(FrSkySportSingleWireSerial& serial, uint8_t 
 		case 8:
 			serial.sendData(BASEVARS_ZGYRO_DATA_ID9, zgyro);
 			break;
-		case 9:
+/*		case 9:
 			serial.sendData(BASEVARS_XMAG_DATA_ID10, xmag);
 			break;
 		case 10:
@@ -67,7 +67,7 @@ void FrSkySportSensorBaseVars::send(FrSkySportSingleWireSerial& serial, uint8_t 
 			break;
 		case 11:
 			serial.sendData(BASEVARS_ZMAG_DATA_ID12, zmag);
-			break;
+			break;*/
     }
     sensorDataIdx++;
     if(sensorDataIdx >= BASEVARS_DATA_COUNT) sensorDataIdx = 0;

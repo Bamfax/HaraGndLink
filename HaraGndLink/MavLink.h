@@ -23,7 +23,7 @@ typedef struct MavClass {
   int32_t	gps_latitude;				// 585522540;
   int32_t	gps_longitude;				// 162344467;
   int32_t	gps_altitude;				// 1000 = 1m
-  int32_t	gps_speed;					// in cm/s
+  uint16_t	gps_speed;					// in cm/s
   uint16_t	gps_pdop;					// GPS positional dilution of position 
   uint16_t	gps_vdop;					// GPS HDOP horizontal dilution of position in cm
   uint16_t	gps_cog;					// ourse over ground (NOT heading, but direction of movement) in degrees * 100, 0.0..359.99 degrees. If unknown it is set to: 65535
@@ -32,8 +32,8 @@ typedef struct MavClass {
   uint32_t	groundspeed;				// Current ground speed in m/s
   int16_t	heading;					// Current heading in degrees, in compass units (0..360, 0=north)
   uint16_t	throttle;					// Current throttle setting in integer percent, 0 to 100
-  int32_t	bar_altitude;				// 100 = 1m
-  int32_t	ap_climb_rate;				// 100= 1m/s
+  float		bar_altitude;				// 100 = 1m
+  float		ap_climb_rate;				// 100 = 1m/s
   
   // MAVLINK_MSG_ID_SERVO_OUTPUT_RAW
   int16_t    motor1;
